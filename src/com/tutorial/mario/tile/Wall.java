@@ -3,6 +3,7 @@ package com.tutorial.mario.tile;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.tutorial.mario.Game;
 import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
 
@@ -14,8 +15,7 @@ public class Wall extends Tile {
 
 	
 	public void render(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect(x, y, width, height);
+		g.drawImage(Game.grass.getBufferedImage(),x,y,width,height,null);
 	}
 
 	
