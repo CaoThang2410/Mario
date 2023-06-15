@@ -1,18 +1,25 @@
 package com.tutorial.mario;
 
 import java.awt.Canvas;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import com.tutorial.mario.entity.Entity;
 import com.tutorial.mario.entity.Player;
 import com.tutorial.mario.gfx.Sprite;
 import com.tutorial.mario.gfx.SpriteSheet;
 import com.tutorial.mario.input.KeyInput;
+import com.tutorial.mario.tile.Wall;
+import java.io.IOException;
 
 public class Game extends Canvas implements Runnable {
 
@@ -24,28 +31,61 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 	private Graphics g;
+	public BufferedImage image;
+
+	public class ImageLoader {
+		public BufferedImage loadImage(String path) {
+			try {
+				image = ImageIO.read(getClass().getResource(path));
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return image;
+		}
+	}
 
 	public static Handler handler;
 
-	public static SpriteSheet sheet1,sheet2,sheet3;
-	
+	public static SpriteSheet sheet1, sheet2, sheet3;
+
 	public static Sprite grass;
 	public static Sprite player[] = new Sprite[10];
+
+	public static Camera cam;
+
 	private void init() {
 		handler = new Handler();
-		
+
 		sheet1 = new SpriteSheet("/map/Terrain (16x16).png");
 		sheet2 = new SpriteSheet("/player/Fall (32x32).png");
 		sheet3 = new SpriteSheet("/player/Run (32x32).png");
 		addKeyListener(new KeyInput());
 		grass = new Sprite(sheet1, 4, 1);
-		for(int i=0;i<player.length;i++)
-		{
-		player[i] = new Sprite(sheet3, i+1, 1); 
+		cam = new Camera();
+		for (int i = 0; i < player.length; i++) {
+			player[i] = new Sprite(sheet3, i + 1, 1);
 		}
 
-		handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
+		
+		 // code trước đó chạy đc 
+		  handler.creatLevel(image); 
+		  handler.addEntity(new Player(300,512, 64, 64, true, Id.player, handler));
+		 
+		// handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
 		// handler.addTile(new Wall(200,200,64,64,true,Id.wall,handler));
+//		try {
+//			image = ImageIO.read(getClass().getResource("/map/Image4.png"));
+//		} catch (IOException e) {
+//
+//			e.printStackTrace();
+//		}
+//		ImageLoader imageLoader = new ImageLoader();
+//
+//		image = imageLoader.loadImage("./res/map/game-over.jpg");
+//
+//		handler.creatLevel(image);
+
 	}
 
 	public synchronized void start() {
@@ -118,6 +158,7 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.PINK);
 		g.fillRect(0, 0, getWidth(), getHeight());
+		g.translate(cam.getX(), cam.getY());
 		handler.render(g);
 		g.dispose();
 		bs.show();
@@ -126,6 +167,20 @@ public class Game extends Canvas implements Runnable {
 
 	public void tick() {
 		handler.tick();
+
+		for (Entity e : handler.entitys) {
+			if (e.getId() == Id.player) {
+				cam.tick(e);
+			}
+		}
+	}
+
+	public static int getFrameWidth() {
+		return WIDTH * scale;
+	}
+
+	public static int getFrameHeight() {
+		return HEIGHT * scale;
 	}
 
 	public Game() {
