@@ -87,8 +87,12 @@ public class Player extends Entity {
 			Entity e = handler.entitys.get(i);
 			if (e.getId() == Id.mushroom) {
 				if (getBounds().intersects(e.getBounds())) {
+					int lpX = getX();
+					int lpY = getY();
 					width *= 2;
 					height *= 2;
+					setX(lpX-width);
+					setY(lpY-height);
 					e.die();
 				}
 			}
