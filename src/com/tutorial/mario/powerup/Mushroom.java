@@ -20,8 +20,6 @@ public class Mushroom extends Entity{
 	
 	public void tick()
 	{
-		x += velX;
-		y += velY;
 	}
 	
 

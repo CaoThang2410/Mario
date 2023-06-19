@@ -61,14 +61,14 @@ public class Game extends Canvas implements Runnable {
 		sheet1 = new SpriteSheet("/map/Terrain (16x16).png");
 		sheet2 = new SpriteSheet("/player/Fall (32x32).png");
 		sheet3 = new SpriteSheet("/player/Run (32x32).png");
-		sheetmushroom = new SpriteSheet("/Item/potion_red.png");
+		sheetmushroom = new SpriteSheet("/Item/potion_red(32x32).png");
 		addKeyListener(new KeyInput());
 		grass = new Sprite(sheet1, 4, 1);
 		cam = new Camera();
 		for (int i = 0; i < player.length; i++) {
 			player[i] = new Sprite(sheet3, i + 1, 1);
 		}
-		//mushroom = new Sprite(sheetmushroom, 1, 1);
+		mushroom = new Sprite(sheetmushroom, 1, 1);
 	
 		/*
 		 * // code trước đó chạy đc handler.crateLevel(image); handler.addEntity(new

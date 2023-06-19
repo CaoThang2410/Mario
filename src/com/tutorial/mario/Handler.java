@@ -82,9 +82,9 @@ public class Handler {
 				if (red == 0 && green == 0 && blue == 255) {//màu xanh thì hiện nv
 					addEntity(new Player(x * 64, y * 64, 64, 64, false, Id.player, this));
 				}
-//				if (red == 255 && green == 0 && blue == 0) {//màu đỏ thì xuất hiện nước tăng lực
-//					addEntity(new Mushroom(x * 64, y * 64, 64, 64, true, Id.mushroom, this));
-//				}
+				if (red == 255 && green == 0 && blue == 0) {//màu đỏ thì xuất hiện nước tăng lực
+					addEntity(new Mushroom(x * 64, y * 64, 64, 64, true, Id.mushroom, this));
+				}
 			}
 		}
 
