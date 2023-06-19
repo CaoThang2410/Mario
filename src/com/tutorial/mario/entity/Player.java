@@ -39,10 +39,11 @@ public class Player extends Entity {
 			x = 0;
 		if (y <= 0)
 			y = 0;
-		if (x + width >= 1080)
-			x = 1080 - width;
-		if (y + height >= 771)
-			y = 771 - height;
+		// xóa giới hạn để nhân vật có thể di chuyển trong map đc
+//		if (x + width >= 1080)
+//			x = 1080 - width;
+//		if (y + height >= 771)
+//			y = 771 - height;
 		for (Tile t : handler.tiles) {
 			if (!t.solid)
 				break;
@@ -81,6 +82,17 @@ public class Player extends Entity {
 				}
 			}
 		}
+
+//		for (int i = 0; i < handler.entitys.size(); i++) {
+//			Entity e = handler.entitys.get(i);
+//			if (e.getId() == Id.mushroom) {
+//				if (getBounds().intersects(e.getBounds())) {
+//					width *= 2;
+//					height *= 2;
+//					e.die();
+//				}
+//			}
+//		}
 		if (jumping) {
 			gravity -= 0.1;
 			setVelY((int) -gravity);

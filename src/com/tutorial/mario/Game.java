@@ -47,11 +47,12 @@ public class Game extends Canvas implements Runnable {
 
 	public static Handler handler;
 
-	public static SpriteSheet sheet1, sheet2, sheet3;
+	public static SpriteSheet sheet1, sheet2, sheet3,sheetmushroom;
 
 	public static Sprite grass;
 	public static Sprite player[] = new Sprite[10];
 
+	public static Sprite mushroom;
 	public static Camera cam;
 
 	private void init() {
@@ -60,31 +61,29 @@ public class Game extends Canvas implements Runnable {
 		sheet1 = new SpriteSheet("/map/Terrain (16x16).png");
 		sheet2 = new SpriteSheet("/player/Fall (32x32).png");
 		sheet3 = new SpriteSheet("/player/Run (32x32).png");
+		sheetmushroom = new SpriteSheet("/Item/potion_red.png");
 		addKeyListener(new KeyInput());
 		grass = new Sprite(sheet1, 4, 1);
 		cam = new Camera();
 		for (int i = 0; i < player.length; i++) {
 			player[i] = new Sprite(sheet3, i + 1, 1);
 		}
+		//mushroom = new Sprite(sheetmushroom, 1, 1);
+	
+		/*
+		 * // code trước đó chạy đc handler.crateLevel(image); handler.addEntity(new
+		 * Player(300,512, 64, 64, true, Id.player, handler));
+		 */
+//		 handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
+//		 handler.addTile(new Wall(200,200,64,64,true,Id.wall,handler));
+		try {
+			image = ImageIO.read(getClass().getResource("/map/test2.png"));
+		} catch (IOException e) {
 
+			e.printStackTrace();
+		}
 		
-		 // code trước đó chạy đc 
-		  handler.creatLevel(image); 
-		  handler.addEntity(new Player(300,512, 64, 64, true, Id.player, handler));
-		 
-		// handler.addEntity(new Player(300, 512, 64, 64, true, Id.player, handler));
-		// handler.addTile(new Wall(200,200,64,64,true,Id.wall,handler));
-//		try {
-//			image = ImageIO.read(getClass().getResource("/map/Image4.png"));
-//		} catch (IOException e) {
-//
-//			e.printStackTrace();
-//		}
-//		ImageLoader imageLoader = new ImageLoader();
-//
-//		image = imageLoader.loadImage("./res/map/game-over.jpg");
-//
-//		handler.creatLevel(image);
+		handler.createLevel(image);
 
 	}
 

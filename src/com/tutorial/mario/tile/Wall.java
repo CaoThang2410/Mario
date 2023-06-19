@@ -1,6 +1,5 @@
 package com.tutorial.mario.tile;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import com.tutorial.mario.Game;
@@ -13,14 +12,12 @@ public class Wall extends Tile {
 		super(x, y, width, height, solid, id, handler);
 	}
 
-	
 	public void render(Graphics g) {
-		g.drawImage(Game.grass.getBufferedImage(),x,y,width,height,null);
+		g.drawImage(Game.grass.getBufferedImage(), x, y, width, height, null);
 	}
 
-	
 	public void tick() {
-		
+
 	}
 
 }

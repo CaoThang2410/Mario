@@ -7,7 +7,7 @@ import com.tutorial.mario.Handler;
 import com.tutorial.mario.Id;
 import com.tutorial.mario.entity.Entity;
 
-public abstract class Mushroom extends Entity{
+public class Mushroom extends Entity{
 
 	public Mushroom(int x, int y, int width, int height, boolean solid, Id id, Handler handler) {
 		super(x, y, width, height, solid, id, handler);
@@ -20,8 +20,8 @@ public abstract class Mushroom extends Entity{
 	
 	public void tick()
 	{
-		x+=velX;
-		y+=velY;
+		x += velX;
+		y += velY;
 	}
 	
 
